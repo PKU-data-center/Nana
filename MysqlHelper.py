@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*- 
-import MySQLdb 
- 
-HOST = '101.200.236.220'
-PORT = 3306
-USER = 'root'
-PASSWORD = 'mysql'
-DBNAME = 'mooc'
-CHARSET = 'utf8'
- 
+import MySQLdb
+import conf
+  
  
 def connect():
     try:
-		cxn = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWORD,port=PORT,db=DBNAME,charset=CHARSET)
+		cxn = MySQLdb.connect(host=conf.HOST, user=conf.USER, passwd=conf.PASSWORD,port=conf.PORT,db=conf.DBNAME,charset=conf.CHARSET)
 		return cxn
     except MySQLdb.Error,e:
         print "Mysql Error %d: %s" % (e.args[0], e.args[1])
@@ -19,7 +13,7 @@ def connect():
  
 # 插入操作
 def insert_one(cur,sql,value):
-    res =  cur.execute(sql ,value)
+    res =  cur.execute(sql,value)
     # 插入成功，res 返回值为1 
     if  1 != res:
         print 'failed'
